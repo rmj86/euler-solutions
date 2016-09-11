@@ -1,0 +1,4 @@
+# compilation results
+**/*.hi
+**/*.o
+**/*.exe
