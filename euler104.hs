@@ -18,17 +18,16 @@
 --------------------------------------------------------------------------------
 
 import Data.Word (Word64)
+import Data.List (findIndices)
 
 fibends = 0:1: zipWith addmod (fibends) (tail fibends) :: [Word64]
-  where addmod a b = mod (a+b) base
-        base = 10^9
+  where addmod a b = mod (a+b) (10^9)
 
 pandigital :: String -> Bool
 pandigital s = all (flip elem s) "123456789"
 
 -- indices of fibs with pandigital ends
-ends = map fst . filter p . zip [0..] $ fibends
-  where p = pandigital . show . snd
+ends = findIndices (pandigital . show) fibends
 
 -------------
 
@@ -39,12 +38,11 @@ fibstarts = (0,0):(1,0): zipWith add (fibstarts) (tail fibstarts) :: [(Word64,In
         add (a,_) (b,_) = truncate (a+b)
 
 -- inidices of fibs with pandigital start
-starts = map fst . filter p . zip [0..] $ fibstarts
-  where p = pandigital . take 9 . show . fst . snd
+starts = findIndices (pandigital . take 9 . show . fst) fibstarts
 
 -----------
 
--- find all values which is an element of both lists
+-- find all values which are an element of the two given lists
 -- assuming both lists are strictly increasing
 findeq :: Ord a => [a] -> [a] -> [a]
 findeq [] _ = []
