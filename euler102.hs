@@ -34,7 +34,7 @@ barycentric (x,y) ((x1,y1),(x2,y2),(x3,y3)) = (l1, l2, l3)
         l3 = 1 - l1 - l2
         det = (y2-y3)*(x1-x3) + (x3-x2)*(y1-y3)
 
--- a triengle contains a point if the barycentric coordinates of that point
+-- a triangle contains a point if the barycentric coordinates of that point
 -- are all in the range [0, 1].
 contains_origin :: Triangle -> Bool
 contains_origin t = all (\x -> 0<=x && x<=1) [l1,l2,l3]
