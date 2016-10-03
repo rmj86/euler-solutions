@@ -32,7 +32,7 @@
 import Data.Array
 import Data.List (intersperse, nub, (\\), unfoldr)
 import Data.Maybe (catMaybes, fromJust, listToMaybe)
-import Euler (timeit)
+import EulerUtils.IO (timeit)
 
 {-----------------------------------  Data  -----------------------------------}
 
