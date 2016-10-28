@@ -14,16 +14,6 @@
   https://projecteuler.net/problem=114
   
 -------------------------------------------------------------------------------}
+ts = 1:1:1: zipWith (\a b-> a+b+1) (drop 2 ts) (scanl (+) 0  ts)
 
-import qualified Data.Map.Lazy as Map
-import Data.Map.Lazy ((!))
-
-memo = Map.fromList [(n, tilings n) | n<-[-1..50]]
-
-tilings n 
- | n < 3 = 1
- | otherwise = memo!(n-1) + sum [memo!i | i<-[(-1)..n-4]]
- 
-solution = tilings 50
-
-main = print solution
+main = print (ts !! 50)
