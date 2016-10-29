@@ -36,17 +36,5 @@ green = tiling 3
 blue = tiling 4
 
 solution = red 50 + green 50 + blue 50 - 3
---------------------------
 
-tilings' w = ts
-  where ts = (replicate w 1) ++ zipWith (+) ts (drop (w-1) ts)
-
-red' = tilings' 2
-green' = tilings' 3
-blue' = tilings' 4
-
-sol = red'!!50 + green'!!50 + blue'!!50 - 3
-
-main = do
-    print solution
-    print sol
+main = print solution
