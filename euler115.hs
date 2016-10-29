@@ -25,17 +25,16 @@
   
 -------------------------------------------------------------------------------}
 
-import qualified Data.Map.Lazy as Map
-import Data.Map.Lazy ((!))
+import Data.Map.Lazy ((!), fromList)
+import Data.List (findIndex)
 
 fillCount m = f
     where
     f n | n < m     = 1
         | otherwise = memo ! n
-    memo = Map.fromList [ (n,  f (n-1) + sum [f i | i <- [-1..n-m-1]] )
-                        | n <- [0..1000] ]
+    memo = fromList [ (n,  f (n-1) + sum [f i | i <- [-1..n-m-1]] )
+                    | n <- [0..1000] ]
 
-solution = fst . head . dropWhile ((<1000000).snd) $ [(n , f n) | n<-[0..]]
-    where f = fillCount 50
+solution = findIndex (>1000000) $ map (fillCount 50) [0..]
 
 main = print solution
