@@ -22,19 +22,11 @@
   https://projecteuler.net/problem=116
   
 -------------------------------------------------------------------------------}
-
-import qualified Data.Map.Lazy as Map
-import Data.Map.Lazy ((!))
-
-tiling width = f 
-    where memo = Map.fromList [(n, f n) | n<-[0..50]]
-          f n | n < width = 1
-              | otherwise = memo ! (n-1) + memo ! (n-width)
+tiling w n = memo !! n
+  where memo = replicate w 1 ++ zipWith (+) (drop (w-1) memo) memo
 
 red = tiling 2
 green = tiling 3
 blue = tiling 4
 
-solution = red 50 + green 50 + blue 50 - 3
-
-main = print solution
+main = print $ red 50 + green 50 + blue 50 - 3
