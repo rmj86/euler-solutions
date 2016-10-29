@@ -24,17 +24,8 @@
   https://projecteuler.net/problem=115
   
 -------------------------------------------------------------------------------}
-
-import Data.Map.Lazy ((!), fromList)
 import Data.List (findIndex)
 
-fillCount m = f
-    where
-    f n | n < m     = 1
-        | otherwise = memo ! n
-    memo = fromList [ (n,  f (n-1) + sum [f i | i <- [-1..n-m-1]] )
-                    | n <- [0..1000] ]
+ts = replicate 50 1 ++ zipWith (\a b-> a+b+1) (drop 49 ts) (scanl (+) 0  ts)
 
-solution = findIndex (>1000000) $ map (fillCount 50) [0..]
-
-main = print solution
+main = print . findIndex (>1000000) $ ts
